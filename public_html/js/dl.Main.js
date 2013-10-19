@@ -10,6 +10,7 @@
         this.init();
     };
     
+    dl.Main = Main;
     var _main = Main.prototype;
     
     _main.init = function () { 
@@ -31,8 +32,7 @@
     };
     
     _main.loopAction = function () {
-        
-        
+        //TODO add cucco
     };
     
     window.onload = function () {
