@@ -29,6 +29,10 @@
         setInterval(function () {
          that.loopAction();
         }, timeFrameMiliSec);
+        
+        dl.ctx.addEventListener('mousemove', function(evt) {
+            dl.mousePos = getMousePos(canvas, evt);
+        }, false);
     };
     
     _main.loopAction = function () {
