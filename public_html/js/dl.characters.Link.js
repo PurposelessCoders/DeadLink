@@ -1,7 +1,7 @@
 (function () {
     
     var SIZE = 10;
-    var SPEED = 10;
+    var SPEED = 20;
         
     var Link = function (x, y) {
       //dl.Character(this, x, y, SIZE);
@@ -41,7 +41,7 @@
     _link.move = function() {
         this.calcDirection();
         
-        this.x += this.dirX * 1 / 60 * SPEED;
-        this.y += this.dirY * 1 / 60 * SPEED;
+        this.x += this.dirX * 1 / dl.values.FRAME_RATE * SPEED;
+        this.y += this.dirY * 1 / dl.values.FRAME_RATE * SPEED;
     };
 }).call(this);
