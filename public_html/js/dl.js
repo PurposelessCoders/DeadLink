@@ -1,4 +1,4 @@
 /**
  * @namespace tsc
  */
-var dl = {};
+var dl = {FRAME_RATE : 60 };
