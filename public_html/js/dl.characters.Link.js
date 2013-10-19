@@ -5,8 +5,8 @@
     
     var Link = function (x, y) {
       dl.Character(this, x, y, SIZE);
-      var dirX = 0;
-      var dirY = 0;
+      this.dirX = 0;
+      this.dirY = 0;
       
       //TODO LATER
       this.loadSprite();
