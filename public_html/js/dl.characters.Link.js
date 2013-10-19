@@ -20,6 +20,8 @@
     };
     
     _link.calcDirection = function () {
+        this.dirX = normalize(dl.mousePos.x - this.x);
+        this.dirY = normalize(dl.mousePos.y - this.y);        
     };
     
     _link.move = function() {
