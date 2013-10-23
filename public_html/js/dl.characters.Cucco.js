@@ -2,6 +2,8 @@
     
     var SIZE = 10;
     var SPEED = 10;
+    var SPEED_ACCELERATION = 1.05;
+    var SPEED_MAX = 40;
 
     var Cucco = function () {
       //dl.Character(this, x, y, SIZE);
@@ -9,6 +11,7 @@
       this.dirY = 0;     
       this.x = 0;
       this.y = 0;
+      this.speed = SPEED;      
       
       this.initPosition();
       this.calcDirection();
@@ -23,17 +26,17 @@
       var randResult = Math.random();  
         console.log (randResult);
         if (randResult <= 0.25) { //TOP
-            this.x = 0;
-            this.y = Math.random() * dl.values.WIDTH;
+            this.y = 0;
+            this.x = Math.random() * dl.values.WIDTH;
         } else if (randResult <= 0.5) { //BOTTOM
-            this.x = Math.random() * dl.values.HEIGHT;       
+            this.x = Math.random() * dl.values.WIDTH;       
             this.y = dl.values.HEIGHT;
         } else if (randResult <= 0.75) { //LEFT
             this.x = 0;
-            this.y = Math.random() * dl.values.WIDTH;;
+            this.y = Math.random() * dl.values.WIDTH;
         } else { //RIGHT
-            this.x = Math.random() * dl.values.HEIGHT;
-            this.y = dl.values.WIDTH;
+            this.y = Math.random() * dl.values.WIDTH;
+            this.x = dl.values.WIDTH;
         }
     };
     
@@ -48,13 +51,15 @@
                 y: dl.mainCharacter.y - this.y
         };
         vector = Math.normalize(vector);
+        if (this.speed < SPEED_MAX)
+        this.speed = this.speed * SPEED_ACCELERATION;
         this.dirX = vector.x;
         this.dirY = vector.y;
     };
     
     _cucco.move = function() {
-        this.x += this.dirX * 1 / dl.values.FRAME_RATE * SPEED;
-        this.y += this.dirY * 1 / dl.values.FRAME_RATE * SPEED;
+        this.x += this.dirX * 1 / dl.values.FRAME_RATE * this.speed;
+        this.y += this.dirY * 1 / dl.values.FRAME_RATE * this.speed;
         
         if (this.x < 0 || this.y < 0 || this.x > dl.values.WIDTH || this.y > dl.values.HEIGTH) {
             this.calcDirection();
