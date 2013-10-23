@@ -53,8 +53,8 @@
         vector = Math.normalize(vector);
         if (this.speed < SPEED_MAX)
         this.speed = this.speed * SPEED_ACCELERATION;
-        this.dirX = vector.x;
-        this.dirY = vector.y;
+        this.dirX = vector.x * (1 - (Math.random() * 0.5 * (Math.random() < 0.5 ? -1 : 1 )));
+        this.dirY = vector.y * (1 - (Math.random() * 0.5 * (Math.random() < 0.5 ? -1 : 1 )));
     };
     
     _cucco.move = function() {
