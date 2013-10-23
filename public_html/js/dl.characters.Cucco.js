@@ -4,6 +4,7 @@
     var SPEED = 10;
     var SPEED_ACCELERATION = 1.05;
     var SPEED_MAX = 40;
+    var ERROR_POURCENT = 0.62;
 
     var Cucco = function () {
       //dl.Character(this, x, y, SIZE);
@@ -53,8 +54,8 @@
         vector = Math.normalize(vector);
         if (this.speed < SPEED_MAX)
         this.speed = this.speed * SPEED_ACCELERATION;
-        this.dirX = vector.x * (1 - (Math.random() * 0.5 * (Math.random() < 0.5 ? -1 : 1 )));
-        this.dirY = vector.y * (1 - (Math.random() * 0.5 * (Math.random() < 0.5 ? -1 : 1 )));
+        this.dirX = vector.x * (1 - (Math.random() * ERROR_POURCENT * (Math.random() < 0.5 ? -1 : 1 )));
+        this.dirY = vector.y * (1 - (Math.random() * ERROR_POURCENT * (Math.random() < 0.5 ? -1 : 1 )));
     };
     
     _cucco.move = function() {
