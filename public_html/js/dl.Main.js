@@ -1,13 +1,11 @@
 (function () {
-    var HEIGHT = 500;
-    var WIDTH = 500
-    
     var Main = function() {
-        this.coccu = [];
-        this.link = new dl.characters.Link(HEIGHT / 2, WIDTH / 2);
+        this.coccu = new Array();
+        this.link = new dl.characters.Link(dl.values.WIDTH / 2, dl.values.HEIGHT / 2);
         this.background = null;
         this.hud = null;
         this.init();
+        this.popTimer = 0;
     };
     
     dl.Main = Main;
@@ -17,10 +15,14 @@
         var that = this;
         dl.mousePos = {x: 0, y: 0};
         var canvas = document.getElementById("gameCanvas");
+        canvas.heigth = dl.values.HEIGHT;
+        canvas.width = dl.values.WIDTH;
         dl.ctx = canvas.getContext("2d");
         canvas.addEventListener('mousemove', function(evt) {
             dl.mousePos = that.getMousePos(canvas, evt);
         }, false);
+        dl.mainCharacter = this.link;
+        dl.myMain = this;
     };
     
     _main.getMousePos = function (canvas, evt) {
@@ -38,28 +40,36 @@
     _main.startLoop = function () {
         var that = this;
         var timeFrameMiliSec = 1000 / dl.FRAME_RATE;
+        
 
         setInterval(function () {
          that.loopAction();
         }, timeFrameMiliSec);
+        
     };
     
     _main.loopAction = function () {
-        //TODO pop cucco
-        //Move
-        for (var i = 0; i < this.coccu.lenght; i++) {
-            this.coccu[i].move();
-        }
-        this.link.move();
-        //Display
+        //Pop new coccu
+        this.popTimer++;
+        if (this.popTimer >= 30)
+            {
+                if (this.coccu.length < 200)
+                    this.coccu.push(new dl.characters.Cucco());
+            this.popTimer = 0;
+            }
+
         //clean screen
-        
+        dl.ctx.clearRect(0, 0, dl.values.WIDTH, dl.values.HEIGHT);
         //cucco
-        for (var i = 0; i < this.coccu.lenght; i++) {
+        for (i = 0; i < this.coccu.length; i++) {
+        //Move
+            this.coccu[i].move();
+        //Display
             this.coccu[i].animation();
         }
         //link
-        this.link.animation();        
+        this.link.move();
+        this.link.animation();
     };
     
     window.onload = function () {
