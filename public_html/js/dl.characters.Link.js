@@ -5,8 +5,8 @@
         
     var Link = function (x, y) {
       //dl.Character(this, x, y, SIZE);
-      this.x = 0;
-      this.y = 0;
+      this.x = x;
+      this.y = y;
       this.dirX = 0;
       this.dirY = 0;
       this.speed = SPEED;
