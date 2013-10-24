@@ -13,6 +13,7 @@
       this.x = 0;
       this.y = 0;
       this.speed = SPEED;      
+      this.size = SIZE;
       
       this.initPosition();
       this.calcDirection();
@@ -25,7 +26,7 @@
     
     _cucco.initPosition = function () {
       var randResult = Math.random();  
-        console.log (randResult);
+
         if (randResult <= 0.25) { //TOP
             this.y = 0;
             this.x = Math.random() * dl.values.WIDTH;

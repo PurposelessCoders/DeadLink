@@ -10,7 +10,8 @@
       this.dirX = 0;
       this.dirY = 0;
       this.speed = SPEED;
-      
+      this.size = SIZE;
+
       //TODO LATER
       this.loadSprite();
     };
@@ -43,5 +44,15 @@
         
         this.x += this.dirX * 1 / dl.values.FRAME_RATE * SPEED;
         this.y += this.dirY * 1 / dl.values.FRAME_RATE * SPEED;
+    };
+    
+    _link.hit = function () {
+        console.log("HIT");
+    };
+    
+    _link.isColliding = function (cucco) {
+        if (Math.abs(cucco.x - this.x) < cucco.size + this.size
+            &&Math.abs(cucco.y - this.y) < cucco.size + this.size)
+            this.hit();
     };
 }).call(this);
