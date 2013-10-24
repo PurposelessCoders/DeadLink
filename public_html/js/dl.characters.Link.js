@@ -30,6 +30,17 @@
     _link.animation = function() {
         //DEBUG FOR NOW, SPRITE COME LATER
         dl.ctx.fillRect(this.x, this.y, 20, 20);
+        
+        //DISPLAY LIFES
+        for (i = 0; i < NBLIFE; i++){
+            dl.ctx.save();
+            if (i < this.life)
+               dl.ctx.fillStyle = '#FF0000';
+           else
+               dl.ctx.fillStyle = '#553355';
+            dl.ctx.fillRect(40 + i * 15, 15, 10, 10);
+        dl.ctx.restore();
+        }
     };
     
     _link.calcDirection = function () {
