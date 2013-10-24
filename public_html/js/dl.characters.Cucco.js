@@ -47,6 +47,14 @@
     };
     
     _cucco.calcDirection = function () {
+        if (this.x < 0)
+            this.x = 0;
+        if (this.y < 0)
+            this.y = 0;
+        if (this.y > dl.values.HEIGHT)
+            this.y = dl.values.HEIGHT;
+        if (this.y > dl.values.WIDTH)
+            this.y = dl.values.WIDTH;
         
         var vector =  {
                 x: dl.mainCharacter.x - this.x,
@@ -63,7 +71,7 @@
         this.x += this.dirX * 1 / dl.values.FRAME_RATE * this.speed;
         this.y += this.dirY * 1 / dl.values.FRAME_RATE * this.speed;
         
-        if (this.x < 0 || this.y < 0 || this.x > dl.values.HEIGTH || this.y > dl.values.WIDTH) {
+        if (this.x <= 0 || this.y <= 0 || this.x >= dl.values.WIDTH - (this.size * 2) || this.y >= dl.values.HEIGHT - (this.size  * 2)) {
             this.calcDirection();
         }
     };
