@@ -62,7 +62,7 @@
         this.x += this.dirX * 1 / dl.values.FRAME_RATE * this.speed;
         this.y += this.dirY * 1 / dl.values.FRAME_RATE * this.speed;
         
-        if (this.x < 0 || this.y < 0 || this.x > dl.values.WIDTH || this.y > dl.values.HEIGTH) {
+        if (this.x < 0 || this.y < 0 || this.x > dl.values.HEIGTH || this.y > dl.values.WIDTH) {
             this.calcDirection();
         }
     };
