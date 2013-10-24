@@ -53,7 +53,7 @@
         this.popTimer++;
         if (this.popTimer >= 30)
             {
-                if (this.coccu.length < 200)
+                if (this.coccu.length < 1)
                     this.coccu.push(new dl.characters.Cucco());
             this.popTimer = 0;
             }
@@ -66,6 +66,8 @@
             this.coccu[i].move();
         //Display
             this.coccu[i].animation();
+        //Check COllider
+            this.link.isColliding(this.coccu[i]);
         }
         //link
         this.link.move();
