@@ -2,7 +2,9 @@
     
     var SIZE = 10;
     var SPEED = 20;
-        
+    var INVULNERABILITY = 5000; //in ms;
+    var NBLIFE = 3;
+    
     var Link = function (x, y) {
       //dl.Character(this, x, y, SIZE);
       this.x = x;
@@ -11,7 +13,9 @@
       this.dirY = 0;
       this.speed = SPEED;
       this.size = SIZE;
-
+      this.life = NBLIFE;
+      this.cooldown = 0;
+      
       //TODO LATER
       this.loadSprite();
     };
@@ -40,6 +44,8 @@
     };
     
     _link.move = function() {
+        if (this.cooldown > 0)
+            this.cooldown -= 1000 / dl.values.FRAME_RATE
         this.calcDirection();
         
         this.x += this.dirX * 1 / dl.values.FRAME_RATE * SPEED;
@@ -47,7 +53,11 @@
     };
     
     _link.hit = function () {
-        console.log("HIT");
+        if (this.cooldown <= 0)
+            {
+                this.life--;
+                this.cooldown = INVULNERABILITY;
+            }
     };
     
     _link.isColliding = function (cucco) {
