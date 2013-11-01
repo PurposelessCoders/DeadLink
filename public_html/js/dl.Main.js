@@ -23,6 +23,14 @@
         }, false);
         dl.mainCharacter = this.link;
         dl.myMain = this;
+        
+        var atlasReq = new  XMLHttpRequest();
+        atlasReq.open("GET", dl.images.framesPath, true);
+        atlasReq.onload = function () {
+                dl.images.frames = JSON.parse(this.responseText)["frames"];
+                console.log(dl.images.frames);
+            };
+        atlasReq.send();
     };
     
     _main.getMousePos = function (canvas, evt) {
@@ -49,6 +57,11 @@
     };
     
     _main.loopAction = function () {
+        if (this.link.life <= 0)
+            {
+                this.finalAnnimation();
+                return;
+            }
         //Pop new coccu
         this.popTimer++;
         if (this.popTimer >= 30)
@@ -58,8 +71,8 @@
             this.popTimer = 0;
             }
 
-        //clean screen
-        dl.ctx.clearRect(0, 0, dl.values.WIDTH, dl.values.HEIGHT);
+        //Draw background
+        dl.ctx.drawImage(dl.images.backGroundImg,0,0,dl.images.backGroundImg.width, dl.images.backGroundImg.height,0,0, dl.values.WIDTH, dl.values.HEIGHT);
         //cucco
         for (i = 0; i < this.coccu.length; i++) {
         //Move
@@ -73,6 +86,10 @@
         this.link.move();
         this.link.animation();
     };
+    
+    _main.finalAnnimation = function () {
+        //TODO;
+    }
     
     window.onload = function () {
         new Main().run();
