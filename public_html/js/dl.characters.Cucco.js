@@ -14,11 +14,14 @@
       this.y = 0;
       this.speed = SPEED;      
       this.size = SIZE;
+      this.spriteCurrent = 0;
+      this.spriteName = "Left_";
+      this.spriteNb = 3;
+      this.spriteTmp = 0;
+      this.spriteTmpChange = 15;
       
       this.initPosition();
       this.calcDirection();
-      //TODO LATER
-      this.loadSprite();
     };
     
     dl.characters.Cucco = Cucco;
@@ -43,7 +46,16 @@
     };
     
     _cucco.animation = function() {
-        dl.ctx.fillRect(this.x, this.y, 20, 20);
+        if (this.dirX >= 0)
+            dl.images.DrawImage(dl.images.mainAtlas, (this.spriteName + this.spriteCurrent.toString()), this.x, this.y, this.size * 2, this.size * 2, true, true);
+        else
+            dl.images.DrawImage(dl.images.mainAtlas, (this.spriteName + this.spriteCurrent.toString()), this.x, this.y, this.size * 2, this.size * 2);
+
+        this.spriteTmp++;
+        if (this.spriteTmp === this.spriteTmpChange) {
+            this.spriteCurrent = (this.spriteCurrent + 1) % this.spriteNb;
+            this.spriteTmp = 0;
+        }
     };
     
     _cucco.calcDirection = function () {
