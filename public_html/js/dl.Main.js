@@ -57,6 +57,7 @@
     };
     
     _main.loopAction = function () {
+        stats.begin();
         if (this.link.life <= 0)
             {
                 this.finalAnnimation();
@@ -66,7 +67,7 @@
         this.popTimer++;
         if (this.popTimer >= 30)
             {
-                if (this.coccu.length < 1)
+                if (this.coccu.length < 0)
                     this.coccu.push(new dl.characters.Cucco());
             this.popTimer = 0;
             }
@@ -85,6 +86,7 @@
         //link
         this.link.move();
         this.link.animation();
+        stats.end();
     };
     
     _main.finalAnnimation = function () {
