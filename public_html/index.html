@@ -7,7 +7,7 @@ and open the template in the editor.
     <head>
         <title>Dead Link / 404 Not Found</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+          <script src="js/stats.min.js"></script>
           <script src="js/dl.js"></script>
           <script src="js/dl.characters.js"></script>
           <script src="js/dl.characters.Link.js"></script>
@@ -20,6 +20,13 @@ and open the template in the editor.
     </head>
   <body>
     <h1>Game canvas</h1>
+    <div id="stats" style="float:right"> </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+        var stats = new Stats();
+	stats.setMode( 1 );
+	document.getElementById("stats").appendChild( stats.domElement );
+        stats.begin();
+    </script>
   </body>
 </html>
