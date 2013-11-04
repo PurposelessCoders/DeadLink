@@ -5,7 +5,7 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dead Link / 404 Not Found</title>
+        <title>404 Not Found. I found a dead Link</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <script src="js/stats.min.js"></script>
           <script src="js/dl.js"></script>
@@ -13,15 +13,25 @@ and open the template in the editor.
           <script src="js/dl.characters.Link.js"></script>
           <script src="js/dl.characters.Cucco.js"></script>
           <script src="js/dl.Character.js"></script>
-           <script src="js/dl.images.js"></script>
+          <script src="js/dl.images.js"></script>
           <script src="js/dl.Main.js"></script>
           <script src="js/dl.Math.js"></script>
+          <script src="js/dl.time.js"></script>
           <script src="js/dl.values.js"></script>
+          <link href='http://fonts.googleapis.com/css?family=Amarante' rel='stylesheet' type='text/css'>
+          <style>body {
+             font-family: 'Amarante', serif;
+             font-size: 48px;
+             color: #D5161B;
+             text-align: center;
+        }</style>
     </head>
-  <body>
-    <h1>Game canvas</h1>
-    <div id="stats" style="float:right"> </div>
+  <body bgcolor="#292C31">
+    <h1>404 Not Found</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="stats" style="text-align: center"> </div>
+    <h4 id="result" style="color: #D5161B">You found a living Link</h4>
+    <p id="score" style="color: #FEC311"></p>
     <script>
         var stats = new Stats();
 	stats.setMode( 1 );
