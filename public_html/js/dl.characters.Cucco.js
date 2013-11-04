@@ -1,10 +1,13 @@
 (function () {
     
-    var SIZE = 10;
-    var SPEED = 10;
+    var SIZE = 20;
+    var SPEED = 200;
     var SPEED_ACCELERATION = 1.05;
     var SPEED_MAX = 40;
     var ERROR_POURCENT = 0.62;
+
+    var IMG_RIGHT = "Cucco_Right_";
+    var IMG_LEFT = "Cucco_Left_";
 
     var Cucco = function () {
       //dl.Character(this, x, y, SIZE);
@@ -15,7 +18,7 @@
       this.speed = SPEED;      
       this.size = SIZE;
       this.spriteCurrent = 0;
-      this.spriteName = "Left_";
+      this.spriteName = "";
       this.spriteNb = 3;
       this.spriteTmp = 0;
       this.spriteTmpChange = 15;
@@ -46,14 +49,17 @@
     };
     
     _cucco.animation = function() {
-        if (this.dirX >= 0)
-            dl.images.DrawImage(dl.images.mainAtlas, (this.spriteName + this.spriteCurrent.toString()), this.x, this.y, this.size * 2, this.size * 2, true, true);
+       if (this.dirX >= 0)
+            dl.images.DrawImage(dl.images.mainAtlas, (IMG_LEFT + this.spriteCurrent.toString()), this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
         else
-            dl.images.DrawImage(dl.images.mainAtlas, (this.spriteName + this.spriteCurrent.toString()), this.x, this.y, this.size * 2, this.size * 2);
+            dl.images.DrawImage(dl.images.mainAtlas, (IMG_RIGHT + this.spriteCurrent.toString()), this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
 
         this.spriteTmp++;
         if (this.spriteTmp === this.spriteTmpChange) {
-            this.spriteCurrent = (this.spriteCurrent + 1) % this.spriteNb;
+            this.spriteCurrent++;
+                if ((this.spriteCurrent === this.spriteNb && Math.random() > 0.2) || this.spriteCurrent > this.spriteNb) {
+                    this.spriteCurrent = 0;
+                }
             this.spriteTmp = 0;
         }
     };
@@ -80,8 +86,8 @@
     };
     
     _cucco.move = function() {
-        this.x += this.dirX * 1 / dl.values.FRAME_RATE * this.speed;
-        this.y += this.dirY * 1 / dl.values.FRAME_RATE * this.speed;
+        this.x += this.dirX * dl.time.DeltaTime() * this.speed;
+        this.y += this.dirY * dl.time.DeltaTime() * this.speed;
         
         if (this.x <= 0 || this.y <= 0 || this.x >= dl.values.WIDTH - (this.size * 2) || this.y >= dl.values.HEIGHT - (this.size  * 2)) {
             this.calcDirection();
