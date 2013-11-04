@@ -53,5 +53,6 @@
       dl.ctx.scale(1, 1);
       dl.ctx.restore();
   };
+  
 }).call(this);
 

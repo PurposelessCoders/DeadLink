@@ -1,11 +1,16 @@
 (function () {
+    
+    var time = dl.time;
+    
     var Main = function() {
         this.coccu = new Array();
         this.link = new dl.characters.Link(dl.values.WIDTH / 2, dl.values.HEIGHT / 2);
         this.background = null;
         this.hud = null;
-        this.init();
+        this.score = 0;
         this.popTimer = 0;
+        this.diplayScore = false;
+        this.init();
     };
     
     dl.Main = Main;
@@ -56,18 +61,27 @@
         
     };
     
+    _main.DisplayFinal = function () {
+        this.diplayScore = true;
+        document.getElementById("result").innerHTML = "You found a <s>living</s> dead Link";
+        document.getElementById("score").innerHTML = "Final Socre: " + Math.floor(this.score);
+    }
+    
     _main.loopAction = function () {
         stats.begin();
+        dl.time.Update();
         if (this.link.life <= 0)
             {
-                this.finalAnnimation();
-                return;
+                if (this.diplayScore === false)
+                    this.DisplayFinal();
             }
+            
+        this.score += this.coccu.length * dl.time.DeltaTime();
         //Pop new coccu
         this.popTimer++;
-        if (this.popTimer >= 30)
+        if (this.popTimer >= 240)
             {
-                if (this.coccu.length < 0)
+                if (this.coccu.length < 500)
                     this.coccu.push(new dl.characters.Cucco());
             this.popTimer = 0;
             }
@@ -84,8 +98,10 @@
             this.link.isColliding(this.coccu[i]);
         }
         //link
-        this.link.move();
-        this.link.animation();
+        if (this.link.life > 0) {
+            this.link.move();
+            this.link.animation();
+        }
         stats.end();
     };
     
