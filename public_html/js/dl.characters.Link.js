@@ -76,6 +76,10 @@
                 x: dl.mousePos.x - this.x,
                 y: dl.mousePos.y - this.y
         };
+        if (Math.abs(vector.x) < 1)
+            vector.x = 0;
+        if (Math.abs(vector.y) < 1)
+            vector.y = 0;
         vector = Math.normalize(vector);
         this.dirX = vector.x;
         this.dirY = vector.y;
