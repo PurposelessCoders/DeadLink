@@ -4,15 +4,10 @@
         this.x = x;
         this.y = y;
         this.size = size;
-        this.sprite = {};
     };
     
     dl.Character = Character;
     var _character = Character.prototype;
-    
-    _character.loadSprite = function () {
-        //Have to be Override
-    };
     
     _character.annimation = function () {
         //Have to be Override

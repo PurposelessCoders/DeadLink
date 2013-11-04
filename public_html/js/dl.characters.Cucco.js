@@ -10,7 +10,6 @@
     var IMG_LEFT = "Cucco_Left_";
 
     var Cucco = function () {
-      //dl.Character(this, x, y, SIZE);
       this.dirX = 0;
       this.dirY = 0;     
       this.x = 0;
@@ -18,7 +17,6 @@
       this.speed = SPEED;      
       this.size = SIZE;
       this.spriteCurrent = 0;
-      this.spriteName = "";
       this.spriteNb = 3;
       this.spriteTmp = 0;
       this.spriteTmpChange = 15;
@@ -49,11 +47,12 @@
     };
     
     _cucco.animation = function() {
+        var frame;
        if (this.dirX >= 0)
-            dl.images.DrawImage(dl.images.mainAtlas, (IMG_LEFT + this.spriteCurrent.toString()), this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
+            frame = IMG_LEFT;
         else
-            dl.images.DrawImage(dl.images.mainAtlas, (IMG_RIGHT + this.spriteCurrent.toString()), this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
-
+            frame = IMG_RIGHT;
+        dl.images.DrawImage(dl.images.mainAtlas, (frame + this.spriteCurrent.toString()), this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
         this.spriteTmp++;
         if (this.spriteTmp === this.spriteTmpChange) {
             this.spriteCurrent++;
@@ -65,14 +64,8 @@
     };
     
     _cucco.calcDirection = function () {
-        if (this.x < 0)
-            this.x = 0;
-        if (this.y < 0)
-            this.y = 0;
-        if (this.y > dl.values.HEIGHT)
-            this.y = dl.values.HEIGHT;
-        if (this.y > dl.values.WIDTH)
-            this.y = dl.values.WIDTH;
+        this.x = Math.clp(this.x, 0, dl.values.WIDTH);
+        this.y = Math.clp(this.y, 0, dl.values.HEIGHT);
         
         var vector =  {
                 x: dl.mainCharacter.x - this.x,
@@ -89,13 +82,8 @@
         this.x += this.dirX * dl.time.DeltaTime() * this.speed;
         this.y += this.dirY * dl.time.DeltaTime() * this.speed;
         
-        if (this.x <= 0 || this.y <= 0 || this.x >= dl.values.WIDTH - (this.size * 2) || this.y >= dl.values.HEIGHT - (this.size  * 2)) {
+        if (this.x <= 0 || this.y <= 0 || this.x >= dl.values.WIDTH || this.y >= dl.values.HEIGHT) {
             this.calcDirection();
         }
     };
-    
-    _cucco.loadSprite = function () {
-        
-    };
-    
 }).call(this);

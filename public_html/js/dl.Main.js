@@ -1,7 +1,5 @@
 (function () {
     
-    var time = dl.time;
-    
     var Main = function() {
         this.coccu = new Array();
         this.link = new dl.characters.Link(dl.values.WIDTH / 2, dl.values.HEIGHT / 2);
@@ -33,7 +31,6 @@
         atlasReq.open("GET", dl.images.framesPath, true);
         atlasReq.onload = function () {
                 dl.images.frames = JSON.parse(this.responseText)["frames"];
-                console.log(dl.images.frames);
             };
         atlasReq.send();
     };
@@ -104,10 +101,6 @@
         }
         stats.end();
     };
-    
-    _main.finalAnnimation = function () {
-        //TODO;
-    }
     
     window.onload = function () {
         new Main().run();

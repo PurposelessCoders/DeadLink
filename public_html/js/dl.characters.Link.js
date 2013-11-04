@@ -2,7 +2,7 @@
     
     var SIZE = 30;
     var SPEED = 200;
-    var INVULNERABILITY = 5000; //in ms;
+    var INVULNERABILITY = 1000; //in ms;
     var NBLIFE = 3;
 
     var IMG_UP = "Link_Back";
@@ -11,7 +11,6 @@
     var IMG_LEFT = "Link_Left";
     
     var Link = function (x, y) {
-      //dl.Character(this, x, y, SIZE);
       this.x = x;
       this.y = y;
       this.dirX = 0;
@@ -64,11 +63,10 @@
         
         //DISPLAY LIFES
         for (i = 0; i < NBLIFE; i++){
-            
-            if (i < this.life)
-           dl.images.DrawImage(dl.images.mainAtlas, "life_0", 40 + i * 15, 15, 14, 14);
+           if (i < this.life)
+               dl.images.DrawImage(dl.images.mainAtlas, "life_0", 40 + i * 15, 15, 14, 14);
            else
-           dl.images.DrawImage(dl.images.mainAtlas, "life_1", 40 + i * 15, 15, 14, 14);
+               dl.images.DrawImage(dl.images.mainAtlas, "life_1", 40 + i * 15, 15, 14, 14);
         }
     };
     
@@ -121,8 +119,6 @@
         if (can_move) {
             this.x = x;
             this.y = y;
-        } else {
-            console.log("this.x = " + this.x + " this.y = " + this.y);
         }
     };
     
